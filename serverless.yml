@@ -1,0 +1,30 @@
+org: feden
+app: march-2023-sls
+service: march-2023-sls
+frameworkVersion: '3'
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  versionFunctions: false
+  timeout: 15
+
+functions:
+  createTodo:
+    handler: src/handlers/createTodo.handler
+    events:
+      - httpApi:
+          path: /todos
+          method: post
+
+  getTodos:
+    handler: src/handlers/getTodos.handler
+    events:
+      - httpApi:
+          path: /todos
+          method: get
