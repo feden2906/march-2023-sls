@@ -11,8 +11,10 @@ provider:
   name: aws
   runtime: nodejs18.x
   region: us-east-1
-  versionFunctions: false
+  versionFunctions: true
   timeout: 15
+  environment:
+    MONGO_URL: ${param:MONGO_URL}
 
 functions:
   createTodo:
@@ -21,10 +23,33 @@ functions:
       - httpApi:
           path: /todos
           method: post
-
   getTodos:
     handler: src/handlers/getTodos.handler
     events:
       - httpApi:
           path: /todos
           method: get
+
+  getTodo:
+    handler: src/handlers/getTodo.handler
+    events:
+      - httpApi:
+          path: /todos/{todoId}
+          method: get
+  updateTodo:
+    handler: src/handlers/updateTodo.handler
+    events:
+      - httpApi:
+          path: /todos/{todoId}
+          method: patch
+  deleteTodo:
+    handler: src/handlers/deleteTodo.handler
+    events:
+      - httpApi:
+          path: /todos/{todoId}
+          method: delete
+
+  sch:
+    handler: src/handlers/sdasd.handler
+    events:
+      - schedule: rate(1 minute)

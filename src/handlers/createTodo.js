@@ -10,8 +10,12 @@ const createTodo = async (event) => {
         updatedAt: date,
         completed: false
     }
+    const result = await connection.collection('todos').insertOne(entity);
 
-    await connection.collection('todos').insertOne(entity)
+    return {
+        statusCode: 201,
+        body: JSON.stringify({...entity, _id: result.insertedId}),
+    }
 };
 
 module.exports = {
