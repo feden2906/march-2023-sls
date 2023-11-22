@@ -8,6 +8,8 @@
     "start:dev": "sls offline start --stage dev",
     "deploy:dev": "sls deploy --stage dev",
     "deploy:prod": "sls deploy --stage prod",
+    "remove:dev": "sls remove --stage dev",
+    "remove:prod": "sls remove --stage prod",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
